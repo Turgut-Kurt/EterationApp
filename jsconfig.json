@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "target": "es2020",
+        "baseUrl": ".",
+        "module": "commonjs",
+        "paths": {
+            "~/*": [
+                "./src/*"
+            ],
+            "~assets": [
+                "./src/assets/index"
+            ],
+            "~components": [
+                "./src/components/index"
+            ],
+            "~config": [
+                "./src/config/index"
+            ],
+            "~hooks": [
+                "./src/hooks/index"
+            ],
+            "~navigation": [
+                "./src/navigation/index"
+            ],
+            "~schema": [
+                "./src/schema/index"
+            ],
+            "~screens": [
+                "./src/screens/index"
+            ],
+            "~utils": [
+                "./src/utils/index"
+            ]
+        }
+    },
+    "exclude": [
+        "./node_modules"
+    ]
+}
