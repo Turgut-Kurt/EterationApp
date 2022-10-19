@@ -1,4 +1,4 @@
-import { CustomText, colors, gs, sizes, CustomHeader2 } from '~/components';
+import {CustomHeader2, CustomText, colors, gs, sizes} from '~/components';
 import {
   FlatList,
   Image,
@@ -6,26 +6,25 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {useCallback, useEffect, useState} from 'react';
+import {calcWidth, fontSize, navigate} from '~/utils';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { calcWidth, fontSize, navigate } from '~/utils';
-import { simpsonsListSelector } from '~/modules/simpsons/selector';
-import useActions from '~/hooks/useActions'
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
-import { mainStack } from '~/config';
-import Modal from 'react-native-modal';
 import IconFeather from 'react-native-vector-icons/Feather';
-import { showMessage } from 'react-native-flash-message';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Modal from 'react-native-modal';
+import {mainStack} from '~/config';
+import {showMessage} from 'react-native-flash-message';
+import {simpsonsListSelector} from '~/modules/simpsons/selector';
+import useActions from '~/hooks/useActions';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 
 const ListScreen = () => {
   const Actions = useActions();
   const insets = useSafeAreaInsets();
   const [removeModal, setRemoveModal] = useState(false);
   const [removeIndex, setRemoveIndex] = useState();
-  const simpsonsList = useSelector(simpsonsListSelector)
-  console.log('simpsonsList' + JSON.stringify(simpsonsList));
+  const simpsonsList = useSelector(simpsonsListSelector);
   const {
     Container,
     AddButton,
@@ -41,10 +40,10 @@ const ListScreen = () => {
       Actions.getListAction();
     }
   }, [simpsonsList]);
-  const handleItemPress = (detailItem) => {
+  const handleItemPress = detailItem => {
     navigate(mainStack.detailScreen, {detailItem});
-  }
-  const handleRemovePress = (removeIndex) => {
+  };
+  const handleRemovePress = removeIndex => {
     setRemoveModal(true);
     setRemoveIndex(removeIndex);
   };
@@ -60,22 +59,23 @@ const ListScreen = () => {
       Actions.jumpUpSimpsons(index);
     }
   };
-  const handleDown = (index) => {
+  const handleDown = index => {
     if (simpsonsList.length === index + 1) {
       showMessage({
         message: 'Hata',
-        description: 'İlgili simpsons zaten en son sırada olduğu için kaydırılamıyor.',
+        description:
+          'İlgili simpsons zaten en son sırada olduğu için kaydırılamıyor.',
         type: 'danger',
       });
-    }
-    else {
+    } else {
       Actions.jumpDownSimpsons(index);
     }
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
+        testID={`person-card-${index}`}
         onPress={() => handleItemPress(item)}
         style={RenderItemContainer}>
         <CustomText
@@ -167,6 +167,7 @@ const ListScreen = () => {
                 setRemoveModal(false);
               }}>
               <CustomText
+                testId="custom-text"
                 style={{...gs.textCc, color: colors.mainColor}}
                 children="İptal"
               />
@@ -205,8 +206,8 @@ const ListScreen = () => {
         renderItem={renderItem}
       />
       <TouchableOpacity
-        onPress={()=>navigate(mainStack.addScreen)}
-        style={[AddButton,{bottom: insets.bottom + fontSize(10)}]}>
+        onPress={() => navigate(mainStack.addScreen)}
+        style={[AddButton, {bottom: insets.bottom + fontSize(10)}]}>
         <MaterialCommunityIcons
           name={'plus'}
           color={colors.color7}
@@ -256,7 +257,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-export { ListScreen };
+export {ListScreen};
 
 // exports DetailScreen Screen
 export * from './DetailScreen';

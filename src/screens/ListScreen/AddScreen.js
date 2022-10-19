@@ -1,14 +1,20 @@
-import {View, StyleSheet} from 'react-native';
-import React, { useState } from 'react'
-import { colors, CustomButton, CustomHeader, CustomInputLabel } from '~/components';
-import { calcWidth, fontSize } from '~/utils';
-import {AddCharacterScreen} from '~/schema';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {
+  CustomButton,
+  CustomHeader,
+  CustomInputLabel,
+  colors,
+} from '~/components';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {calcWidth, fontSize} from '~/utils';
 
-import { Formik } from 'formik';
+import {AddCharacterScreen} from '~/schema';
+import {Formik} from 'formik';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import useActions from '~/hooks/useActions';
+
 const AddScreen = () => {
-  const { Container, } = styles;
+  const {Container} = styles;
   const Actions = useActions();
   const [formikInitialValues, setFormikinitialValues] = useState({
     charName: '',
@@ -19,7 +25,7 @@ const AddScreen = () => {
   return (
     <View style={Container}>
       <CustomHeader title={'Yeni Karakter Ekle'} />
-      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled" >
+      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
         <Formik
           validationSchema={AddCharacterScreen}
           initialValues={formikInitialValues}
@@ -37,6 +43,7 @@ const AddScreen = () => {
               <CustomInputLabel
                 name={'charName'}
                 containerProps={{
+                  testId: 'enter-character-name',
                   label: 'Karakter İsmi',
                   placeholder: 'Karakterin ismi',
                   maxLength: 50,
@@ -72,6 +79,7 @@ const AddScreen = () => {
               />
 
               <CustomButton
+                testId="custom-button"
                 style={[
                   {marginTop: 10},
                   values.imageLink !== '' && isValid === true
@@ -90,7 +98,6 @@ const AddScreen = () => {
   );
 };
 const styles = StyleSheet.create({
-  Container: { backgroundColor: colors.color7, flex: 1 },
- 
+  Container: {backgroundColor: colors.color7, flex: 1},
 });
 export {AddScreen};

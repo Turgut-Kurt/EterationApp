@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match with snapshot 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#1F2232",
+      "fontFamily": "EncodeSans-Regular",
+      "fontSize": 28,
+      "paddingTop": 1,
+    }
+  }
+  testID="custom-text-children"
+>
+  Test
+</Text>
+`;

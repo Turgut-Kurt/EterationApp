@@ -39,6 +39,7 @@ const CustomText = props => {
 
   return (
     <Text
+      testID="custom-text-children"
       style={StyleSheet.flatten([
         DefaultTextStyle,
         StyleSheet.flatten([style]),
